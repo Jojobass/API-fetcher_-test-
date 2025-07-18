@@ -1,0 +1,7 @@
+/Include
+/Scripts
+/Lib
+pyvenv.cfg
+/jsons
+__pycache__
+logs

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Database Info</title>
+    <style>
+        body { font-family: sans-serif; padding: 2rem; }
+        table { border-collapse: collapse; margin-bottom: 3rem; width: 100%; }
+        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+        th { background-color: #f5f5f5; }
+        h2 { margin-top: 3rem; border-bottom: 2px solid #ddd; }
+    </style>
+</head>
+<body>
+    <h1>📊 Database Contents</h1>
+    {% for table_name, rows in data.items() %}
+        <h2>{{ table_name }}</h2>
+        {% if rows %}
+            <table>
+                <thead>
+                    <tr>
+                        {% for col in rows[0].keys() %}
+                            <th>{{ col }}</th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in rows %}
+                        <tr>
+                            {% for value in row.values() %}
+                                <td>{{ value }}</td>
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p><em>No data</em></p>
+        {% endif %}
+    {% endfor %}
+</body>
+</html>
