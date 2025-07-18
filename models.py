@@ -50,7 +50,7 @@ class DeliveryMethod(db.Model):
 class DeliveryAddr(db.Model):
     __tablename__ = 'addr_points'
     id = db.Column(db.Integer, primary_key=True)
-    method_id = db.Column(db.ForeignKey(DeliveryMethod.id))
+    method_id = db.Column(db.ForeignKey(DeliveryMethod.id, onupdate='CASCADE', ondelete='CASCADE'))
     address = db.Column(db.String(255))
     name = db.Column(db.String(100))
 
@@ -85,8 +85,8 @@ class Product(db.Model):
 class ProductCategories(db.Model):
     __tablename__ = 'products_categories'
     id = db.Column(db.Integer, primary_key=True)
-    product_id = db.Column(db.ForeignKey(Product.Product_ID))
-    category_id = db.Column(db.ForeignKey(Category.Category_ID))
+    product_id = db.Column(db.ForeignKey(Product.Product_ID, onupdate='CASCADE', ondelete='CASCADE'))
+    category_id = db.Column(db.ForeignKey(Category.Category_ID, onupdate='CASCADE', ondelete='CASCADE'))
     uniqueness = db.UniqueConstraint('product_id', 'category_id')
 
 class ProductImage(db.Model):
@@ -94,7 +94,7 @@ class ProductImage(db.Model):
     Image_ID = db.Column(db.Integer, primary_key=True)
     Image_URL = db.Column(db.String(255))
     MainImage = db.Column(db.Boolean)
-    Product_ID = db.Column(db.ForeignKey(Product.Product_ID))
+    Product_ID = db.Column(db.ForeignKey(Product.Product_ID, onupdate='CASCADE', ondelete='CASCADE'))
     position = db.Column(db.String(50), nullable=True)
     sort_order = db.Column(db.Integer)
     title = db.Column(db.String(50), nullable=True)
@@ -102,7 +102,7 @@ class ProductImage(db.Model):
 class ProductParameter(db.Model):
     __tablename__ = 'product_parameters'
     Parameter_ID = db.Column(db.Integer, primary_key=True)
-    Product_ID = db.Column(db.ForeignKey(Product.Product_ID))
+    Product_ID = db.Column(db.ForeignKey(Product.Product_ID, onupdate='CASCADE', ondelete='CASCADE'))
     chosen = db.Column(db.Boolean, nullable=True)
     disabled = db.Column(db.Boolean, nullable=True)
     extra_field_color = db.Column(db.JSON, nullable=True)
